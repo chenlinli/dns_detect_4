@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties resource="datasource.properties">
+    </properties>
+
+    <typeAliases>
+        <package name="cn.cl.detect.domain"></package>
+    </typeAliases>
+    <!-- 和spring整合后 environments配置将废除 -->
+    <environments default="development"><!-- 默认使用development的环境 -->
+        <environment id="development">
+            <!-- 使用jdbc事务管理 -->
+            <transactionManager type="JDBC" />
+            <!-- 数据库连接池 -->
+            <dataSource type="cn.cl.detect.config.DBCPDataSourceFactory">
+                <property name="driverClassName" value="${db.driverClassName}" />
+                <property name="url" value="${db.url}" />
+                <property name="username" value="${db.username}" />
+                <property name="password" value="${db.password}" />
+                <property name="minIdle" value="${db.minIdle}"/>
+                <property name="maxIdle" value="${db.maxIdle}"/><!-- maxIdle，最大空闲数 -->
+                <property name="maxActive" value="${db.maxActive}"/>
+                <property name="validationQuery" value="${db.validationQuery}"/>
+
+            </dataSource>
+        </environment>
+
+    </environments>
+    <!-- 加载映射文件 -->
+    <mappers >
+        <mapper resource="mappers/NormalRecordMapper.xml"/>
+        <mapper resource="mappers/IodineMapper.xml"/>
+        <mapper resource="mappers/Dnscat2Mapper.xml"/>
+        <mapper resource="mappers/Dns2tcpMapper.xml"/>
+        <mapper resource="mappers/ActionDns2tcpMapper.xml"/>
+        <mapper resource="mappers/ActionDnscat2Mapper.xml"/>
+        <mapper resource="mappers/ActionIodineMapper.xml"/>
+        <mapper resource="mappers/ActionNormalMapper.xml"/>
+        <mapper resource="mappers/ActionTimeScopeMapper.xml"/>
+
+    </mappers>
+</configuration>

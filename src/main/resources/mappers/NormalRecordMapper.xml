@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cl.detect.dao.NormalRecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.cl.detect.domain.NormalRecord" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="domain_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, domain_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dns_umbrella
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dns_umbrella
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.cl.detect.domain.NormalRecord" >
+    insert into dns_umbrella (id, domain_name)
+    values (#{id,jdbcType=BIGINT}, #{domainName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cl.detect.domain.NormalRecord" >
+    insert into dns_umbrella
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="domainName != null" >
+        domain_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="domainName != null" >
+        #{domainName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cl.detect.domain.NormalRecord" >
+    update dns_umbrella
+    <set >
+      <if test="domainName != null" >
+        domain_name = #{domainName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cl.detect.domain.NormalRecord" >
+    update dns_umbrella
+    set domain_name = #{domainName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByIds" parameterType="map" resultType="string">
+    select domain_name
+    from dns_umbrella
+    where id in
+    <foreach collection="idsFortable" open="(" separator="," close=")" item="val">
+      ${val}
+    </foreach>
+  </select>
+
+  <select id="selectByIdScope" resultType="string">
+    select domain_name
+    from dns_umbrella
+    <where>
+      id BETWEEN #{from} AND #{to}
+    </where>
+  </select>
+
+  <select id="selectMainDomainNameWithLimit" resultType="string">
+    select domain_name
+    from dns_alexa
+    limit #{start},#{end}
+  </select>
+</mapper>

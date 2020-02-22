@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cl.detect.dao.ActionIodineMapper" >
+  <resultMap id="BaseResultMap" type="cn.cl.detect.domain.ActionIodine" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="transaction_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="query_domain" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="src_addr" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dst_addr" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="q_type" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="qr" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="rdata_length" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="main_domain" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="andata_length" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, transaction_id, query_domain, src_addr, dst_addr, q_type, qr, time, rdata_length, 
+    main_domain, andata_length
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from abnormal_iodine_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from abnormal_iodine_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cl.detect.domain.ActionIodine" >
+    insert into abnormal_iodine_record (id, transaction_id, query_domain, 
+      src_addr, dst_addr, q_type, 
+      qr, time, rdata_length, 
+      main_domain, andata_length)
+    values (#{id,jdbcType=INTEGER}, #{transactionId,jdbcType=VARCHAR}, #{queryDomain,jdbcType=VARCHAR}, 
+      #{srcAddr,jdbcType=VARCHAR}, #{dstAddr,jdbcType=VARCHAR}, #{qType,jdbcType=CHAR}, 
+      #{qr,jdbcType=CHAR}, #{time,jdbcType=TIMESTAMP}, #{rdataLength,jdbcType=INTEGER}, 
+      #{mainDomain,jdbcType=VARCHAR}, #{andataLength,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cl.detect.domain.ActionIodine" >
+    insert into abnormal_iodine_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="transactionId != null" >
+        transaction_id,
+      </if>
+      <if test="queryDomain != null" >
+        query_domain,
+      </if>
+      <if test="srcAddr != null" >
+        src_addr,
+      </if>
+      <if test="dstAddr != null" >
+        dst_addr,
+      </if>
+      <if test="qType != null" >
+        q_type,
+      </if>
+      <if test="qr != null" >
+        qr,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="rdataLength != null" >
+        rdata_length,
+      </if>
+      <if test="mainDomain != null" >
+        main_domain,
+      </if>
+      <if test="andataLength != null" >
+        andata_length,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="queryDomain != null" >
+        #{queryDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="srcAddr != null" >
+        #{srcAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="dstAddr != null" >
+        #{dstAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="qType != null" >
+        #{qType,jdbcType=CHAR},
+      </if>
+      <if test="qr != null" >
+        #{qr,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rdataLength != null" >
+        #{rdataLength,jdbcType=INTEGER},
+      </if>
+      <if test="mainDomain != null" >
+        #{mainDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="andataLength != null" >
+        #{andataLength,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cl.detect.domain.ActionIodine" >
+    update abnormal_iodine_record
+    <set >
+      <if test="transactionId != null" >
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="queryDomain != null" >
+        query_domain = #{queryDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="srcAddr != null" >
+        src_addr = #{srcAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="dstAddr != null" >
+        dst_addr = #{dstAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="qType != null" >
+        q_type = #{qType,jdbcType=CHAR},
+      </if>
+      <if test="qr != null" >
+        qr = #{qr,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rdataLength != null" >
+        rdata_length = #{rdataLength,jdbcType=INTEGER},
+      </if>
+      <if test="mainDomain != null" >
+        main_domain = #{mainDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="andataLength != null" >
+        andata_length = #{andataLength,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cl.detect.domain.ActionIodine" >
+    update abnormal_iodine_record
+    set transaction_id = #{transactionId,jdbcType=VARCHAR},
+      query_domain = #{queryDomain,jdbcType=VARCHAR},
+      src_addr = #{srcAddr,jdbcType=VARCHAR},
+      dst_addr = #{dstAddr,jdbcType=VARCHAR},
+      q_type = #{qType,jdbcType=CHAR},
+      qr = #{qr,jdbcType=CHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      rdata_length = #{rdataLength,jdbcType=INTEGER},
+      main_domain = #{mainDomain,jdbcType=VARCHAR},
+      andata_length = #{andataLength,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByQtypeAndTimeScope" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    from abnormal_iodine_record
+    where q_type=#{q_type}
+    and time between #{start} and #{end}
+  </select>
+</mapper>
